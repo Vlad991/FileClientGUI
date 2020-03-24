@@ -1,6 +1,7 @@
 package com.filesynch;
 
 import com.filesynch.dto.ClientInfoDTO;
+import com.filesynch.dto.ClientStatus;
 import com.filesynch.gui.ConnectToServer;
 import com.filesynch.gui.FileSynchronizationClient;
 import com.filesynch.logger.Logger;
@@ -19,9 +20,9 @@ public class Main {
     public static FileSynchronizationClient fileSynchronizationClient;
     public static ClientGui clientGui;
     public static ClientRmiInt clientRmi;
+    public static ClientInfoDTO clientInfoDTO;
 
     public static void main(String[] args) {
-        ClientInfoDTO clientInfoDTO = null;
         try {
             clientRmi = (ClientRmiInt) Naming.lookup("rmi://localhost:8090/gui");
             clientGui = new ClientGui(clientRmi);
@@ -32,19 +33,54 @@ public class Main {
 
         System.setProperty("java.awt.headless", "false");
 
-        connectToServerFrame = new JFrame("Connect To Server");
-        connectToServer = new ConnectToServer();
-        connectToServerFrame.setContentPane(connectToServer.getJPanelMain());
-        connectToServerFrame.pack();
-        connectToServerFrame.setLocationRelativeTo(null);
-        connectToServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        connectToServerFrame.setVisible(true);
+        ClientStatus currentClientStatus = ClientStatus.NEW;
+        try {
+            currentClientStatus = clientRmi.getClientStatus();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
-        if (clientInfoDTO != null) {
-            connectToServer.getJTextFieldName().setText(clientInfoDTO.getName());
-            connectToServer.getJTextFieldFilesFolder().setText(clientInfoDTO.getFilesFolder());
-            connectToServer.getJTextFieldSendFrequency().setText(String.valueOf(clientInfoDTO.getSendFrequency()));
-            connectToServer.getJTextFieldAliveFrequency().setText(String.valueOf(clientInfoDTO.getAliveRequestFrequency()));
+        if (currentClientStatus == ClientStatus.NEW) {
+            connectToServerFrame = new JFrame("Connect To Server");
+            connectToServer = new ConnectToServer();
+            connectToServerFrame.setContentPane(connectToServer.getJPanelMain());
+            connectToServerFrame.pack();
+            connectToServerFrame.setLocationRelativeTo(null);
+            connectToServerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            connectToServerFrame.setVisible(true);
+
+            if (clientInfoDTO != null) {
+                connectToServer.getJTextFieldName().setText(clientInfoDTO.getName());
+                connectToServer.getJTextFieldFilesFolder().setText(clientInfoDTO.getFilesFolder());
+                connectToServer.getJTextFieldSendFrequency().setText(String.valueOf(clientInfoDTO.getSendFrequency()));
+                connectToServer.getJTextFieldAliveFrequency().setText(String.valueOf(clientInfoDTO.getAliveRequestFrequency()));
+            }
+        } else {
+            fileSynchronizationClient = new FileSynchronizationClient();
+            Logger.logArea = fileSynchronizationClient.getJTextAreaLog();
+
+            clientFrame = new JFrame("File Synchronization Client");
+            clientFrame.setContentPane(fileSynchronizationClient.getJPanelClient());
+            clientFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            clientFrame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                    if (JOptionPane.showConfirmDialog(clientFrame,
+                            "Are you sure you want to close this window?", "Close Window?",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                        try {
+                            //client.logoutFromServer();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        System.exit(0);
+                    }
+                }
+            });
+            clientFrame.pack();
+            clientFrame.setLocationRelativeTo(null);
+            clientFrame.setVisible(true);
         }
     }
 
@@ -82,7 +118,6 @@ public class Main {
         clientFrame.pack();
         clientFrame.setLocationRelativeTo(null);
         clientFrame.setVisible(true);
-
     }
 
     public static void sendMessage(String message) {

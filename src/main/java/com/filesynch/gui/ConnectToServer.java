@@ -41,7 +41,7 @@ public class ConnectToServer {
                 String filesFolder = jTextFieldFilesFolder.getText();
                 String sendFrequency = jTextFieldSendFrequency.getText();
                 String aliveRequestFrequency = jTextFieldAliveFrequency.getText();
-                ClientInfoDTO clientInfoDTO = new ClientInfoDTO();
+                ClientInfoDTO clientInfoDTO = Main.clientInfoDTO;
                 clientInfoDTO.setName(name);
                 clientInfoDTO.setFilesFolder(filesFolder);
                 clientInfoDTO.setSendFrequency(Integer.parseInt(sendFrequency));
