@@ -1,5 +1,6 @@
 package com.filesynch;
 
+import com.bulenkov.darcula.DarculaLaf;
 import com.filesynch.dto.ClientInfoDTO;
 import com.filesynch.dto.ClientStatus;
 import com.filesynch.gui.ConnectToServer;
@@ -9,6 +10,7 @@ import com.filesynch.rmi.ClientGui;
 import com.filesynch.rmi.ClientRmiInt;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicLookAndFeel;
 import java.awt.event.WindowAdapter;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -22,7 +24,9 @@ public class Main {
     public static ClientRmiInt clientRmi;
     public static ClientInfoDTO clientInfoDTO;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        BasicLookAndFeel darcula = new DarculaLaf();
+        UIManager.setLookAndFeel(darcula);
         try {
             clientRmi = (ClientRmiInt) Naming.lookup("rmi://localhost:8090/gui");
             clientGui = new ClientGui(clientRmi);
@@ -57,7 +61,7 @@ public class Main {
             }
         } else {
             fileSynchronizationClient = new FileSynchronizationClient();
-            Logger.logArea = fileSynchronizationClient.getJTextAreaLog();
+            Logger.logArea = fileSynchronizationClient.getTextPane1();
 
             clientFrame = new JFrame("File Synchronization Client");
             clientFrame.setContentPane(fileSynchronizationClient.getJPanelClient());
@@ -86,7 +90,7 @@ public class Main {
 
     public static void connectToServer(String ip, String port, ClientInfoDTO clientInfoDTO) {
         fileSynchronizationClient = new FileSynchronizationClient();
-        Logger.logArea = fileSynchronizationClient.getJTextAreaLog();
+        Logger.logArea = fileSynchronizationClient.getTextPane1();
 
         try {
             clientRmi.connectToServer(ip, port, clientInfoDTO);

@@ -24,7 +24,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="localhost"/>
+        </properties>
       </component>
       <component id="64b5f" class="javax.swing.JLabel" binding="jLabelPort">
         <constraints>
@@ -48,7 +50,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="36792"/>
+        </properties>
       </component>
       <component id="664cd" class="javax.swing.JTextField" binding="jTextFieldName">
         <constraints>

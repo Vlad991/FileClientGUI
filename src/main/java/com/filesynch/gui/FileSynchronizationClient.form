@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="jPanelClient" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="20" bottom="10" right="20"/>
     <constraints>
-      <xy x="20" y="20" width="703" height="501"/>
+      <xy x="20" y="20" width="724" height="501"/>
     </constraints>
     <properties>
       <preferredSize width="800" height="500"/>
@@ -16,7 +16,10 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font name="JetBrains Mono" size="24" style="1"/>
+          <tabPlacement value="2"/>
+        </properties>
         <border type="none"/>
         <children>
           <grid id="1367b" binding="jPanelMain" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -94,18 +97,15 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="d674f" class="javax.swing.JTextArea" binding="jTextAreaLog">
+                      <component id="5beda" class="javax.swing.JTextPane" binding="textPane1" default-binding="true">
                         <constraints/>
-                        <properties>
-                          <autoscrolls value="true"/>
-                          <rows value="20"/>
-                        </properties>
+                        <properties/>
                       </component>
                     </children>
                   </scrollpane>
                 </children>
               </grid>
-              <grid id="2c7a2" binding="jPanelFile" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="2c7a2" binding="jPanelFile" layout-manager="GridLayoutManager" row-count="3" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="5" left="5" bottom="5" right="5"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -146,12 +146,6 @@
                     <properties>
                       <text value="Send File"/>
                     </properties>
-                  </component>
-                  <component id="c7a08" class="javax.swing.JProgressBar" binding="jProgressBarFile">
-                    <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
                   </component>
                   <component id="481ee" class="javax.swing.JButton" binding="jButtonSendAllFiles">
                     <constraints>

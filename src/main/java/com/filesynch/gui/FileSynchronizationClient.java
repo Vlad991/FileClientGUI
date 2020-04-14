@@ -27,15 +27,13 @@ public class FileSynchronizationClient {
     private JButton jButtonSendFile;
     private JTextField jTextFieldCommand;
     private JButton jButtonSendCommand;
-    @Getter
-    private JTextArea jTextAreaLog;
     private JLabel jLabelFileTitle;
     private JLabel jLabelFile;
     private JLabel jLabelCommand;
-    @Getter
-    private JProgressBar jProgressBarFile;
     private JButton jButtonSendAllFiles;
     private JButton updateDBButton;
+    @Getter
+    private JTextPane textPane1;
     private JButton jButtonSendAllFilesFast;
     private JButton jButtonSendFileFast;
 
@@ -93,6 +91,9 @@ public class FileSynchronizationClient {
         jPanelClient.setLayout(new GridLayoutManager(1, 1, new Insets(10, 20, 10, 20), -1, -1));
         jPanelClient.setPreferredSize(new Dimension(800, 500));
         tabbedPane1 = new JTabbedPane();
+        Font tabbedPane1Font = this.$$$getFont$$$("JetBrains Mono", Font.BOLD, 24, tabbedPane1.getFont());
+        if (tabbedPane1Font != null) tabbedPane1.setFont(tabbedPane1Font);
+        tabbedPane1.setTabPlacement(2);
         jPanelClient.add(tabbedPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
         jPanelMain = new JPanel();
         jPanelMain.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
@@ -119,12 +120,10 @@ public class FileSynchronizationClient {
         jPanelLog.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         jPanelLog.add(scrollPane1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        jTextAreaLog = new JTextArea();
-        jTextAreaLog.setAutoscrolls(true);
-        jTextAreaLog.setRows(20);
-        scrollPane1.setViewportView(jTextAreaLog);
+        textPane1 = new JTextPane();
+        scrollPane1.setViewportView(textPane1);
         jPanelFile = new JPanel();
-        jPanelFile.setLayout(new GridLayoutManager(4, 4, new Insets(5, 5, 5, 5), -1, -1));
+        jPanelFile.setLayout(new GridLayoutManager(3, 4, new Insets(5, 5, 5, 5), -1, -1));
         jPanelMain.add(jPanelFile, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         jPanelFile.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-7939681)), null));
         jLabelFileTitle = new JLabel();
@@ -138,8 +137,6 @@ public class FileSynchronizationClient {
         jButtonSendFile = new JButton();
         jButtonSendFile.setText("Send File");
         jPanelFile.add(jButtonSendFile, new GridConstraints(1, 2, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        jProgressBarFile = new JProgressBar();
-        jPanelFile.add(jProgressBarFile, new GridConstraints(3, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         jButtonSendAllFiles = new JButton();
         jButtonSendAllFiles.setText("Send All Files");
         jPanelFile.add(jButtonSendAllFiles, new GridConstraints(1, 3, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -164,6 +161,25 @@ public class FileSynchronizationClient {
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane1.addTab("Queues", panel2);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
     }
 
     /**

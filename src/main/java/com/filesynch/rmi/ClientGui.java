@@ -17,4 +17,24 @@ public class ClientGui extends UnicastRemoteObject implements ClientGuiInt {
     public void log(String stringToLog) throws RemoteException {
         Logger.log(stringToLog);
     }
+
+    @Override
+    public void logYellow(String stringToLog) throws RemoteException {
+        Logger.logYellow(stringToLog);
+    }
+
+    @Override
+    public void logBlue(String stringToLog) throws RemoteException {
+        Logger.logBlue(stringToLog);
+    }
+
+    @Override
+    public void logGreen(String stringToLog) throws RemoteException {
+        Logger.logGreen(stringToLog);
+    }
+
+    @Override
+    public void logRed(String stringToLog) throws RemoteException {
+        Logger.logRed(stringToLog);
+    }
 }

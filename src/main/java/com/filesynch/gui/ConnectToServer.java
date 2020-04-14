@@ -74,6 +74,7 @@ public class ConnectToServer {
         jLabelIP.setText("Server IP:");
         jPanelMain.add(jLabelIP, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         jTextFieldIP = new JTextField();
+        jTextFieldIP.setText("localhost");
         jPanelMain.add(jTextFieldIP, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         jLabelPort = new JLabel();
         jLabelPort.setText("Server Port:");
@@ -82,6 +83,7 @@ public class ConnectToServer {
         jLabelName.setText("Name:");
         jPanelMain.add(jLabelName, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         jTextFieldPort = new JTextField();
+        jTextFieldPort.setText("36792");
         jPanelMain.add(jTextFieldPort, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         jTextFieldName = new JTextField();
         jPanelMain.add(jTextFieldName, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
