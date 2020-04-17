@@ -3,6 +3,7 @@ package com.filesynch;
 import com.bulenkov.darcula.DarculaLaf;
 import com.filesynch.dto.ClientInfoDTO;
 import com.filesynch.dto.ClientStatus;
+import com.filesynch.dto.SettingsDTO;
 import com.filesynch.gui.ConnectToServer;
 import com.filesynch.gui.FileSynchronizationClient;
 import com.filesynch.logger.Logger;
@@ -55,9 +56,6 @@ public class Main {
 
             if (clientInfoDTO != null) {
                 connectToServer.getJTextFieldName().setText(clientInfoDTO.getName());
-                connectToServer.getJTextFieldFilesFolder().setText(clientInfoDTO.getFilesFolder());
-                connectToServer.getJTextFieldSendFrequency().setText(String.valueOf(clientInfoDTO.getSendFrequency()));
-                connectToServer.getJTextFieldAliveFrequency().setText(String.valueOf(clientInfoDTO.getAliveRequestFrequency()));
             }
         } else {
             fileSynchronizationClient = new FileSynchronizationClient();
@@ -143,6 +141,31 @@ public class Main {
     public static void sendAllFiles() {
         try {
             clientRmi.sendAllFiles();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static SettingsDTO getSettings() {
+        try {
+            return clientRmi.getSettings();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return new SettingsDTO();
+    }
+
+    public static void setSettings(SettingsDTO settings) {
+        try {
+            clientRmi.setSettings(settings);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void logout() {
+        try {
+            clientRmi.logout();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
