@@ -29,7 +29,7 @@ public class Main {
         BasicLookAndFeel darcula = new DarculaLaf();
         UIManager.setLookAndFeel(darcula);
         try {
-            clientRmi = (ClientRmiInt) Naming.lookup("rmi://localhost:8090/gui");
+            clientRmi = (ClientRmiInt) Naming.lookup("rmi://localhost:36790/gui");
             clientGui = new ClientGui(clientRmi);
             clientInfoDTO = clientRmi.connectGuiToClient(clientGui);
         } catch (Exception ex) {

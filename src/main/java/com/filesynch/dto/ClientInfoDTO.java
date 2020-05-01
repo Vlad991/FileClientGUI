@@ -13,6 +13,7 @@ import java.io.Serializable;
 @ToString
 public class ClientInfoDTO implements Serializable {
     static final long serialVersionUID = 10L;
+    private Long id;
     private String login;
     private String name;
     private String externalIp;
@@ -20,7 +21,12 @@ public class ClientInfoDTO implements Serializable {
     private String pcName;
     private String pcModel;
     private ClientStatus status;
-    private String filesFolder;
+    private String outputFilesFolder;
+    private String inputFilesFolder;
+    private int filePartSize;
+    private int handlersCount;
+    private int handlerTimeout;
+    private int threadsCount;
     private int sendFrequency;
     private int aliveRequestFrequency;
 }

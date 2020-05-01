@@ -38,6 +38,7 @@ public class ConnectToServer {
                 ClientInfoDTO clientInfoDTO = Main.clientInfoDTO;
                 clientInfoDTO.setName(name);
                 clientInfoDTO.setStatus(ClientStatus.NEW);
+                jButtonConnect.setText("Connecting ...");
                 Main.connectToServer(ip, port, clientInfoDTO);
             }
         });

@@ -18,7 +18,7 @@
         </constraints>
         <properties>
           <focusable value="false"/>
-          <font name="JetBrains Mono" size="24" style="1"/>
+          <font name="JetBrains Mono" size="22" style="1"/>
           <tabPlacement value="2"/>
         </properties>
         <border type="none"/>
